@@ -57,7 +57,6 @@ int main()
 	cout << "Tree of integer, created using comparator less (by default): " << endl;
 	treeInt.print();
 
-	//работа с компаратором greater
 	ifstream fileInp2;
 	fileInp2.open("inp2.txt");
 
@@ -74,7 +73,6 @@ int main()
 	cout << "Tree created using comparator greater: " << endl;
 	treeIntGreater.print();
 
-	//дерево с классом human
 	ifstream fileInpNuman;
 	fileInpNuman.open("inp3.txt");
 
@@ -135,7 +133,7 @@ int main()
 			cin >> currentAge;
 			currentHuman.name = currentName;
 			currentHuman.age = currentAge;
-			if (treeHuman.search_element(currentHuman))
+			if (treeHuman.is_element_exist(currentHuman))
 				cout << "Element exists." << endl;
 			else
 				cout << "Not found." << endl;

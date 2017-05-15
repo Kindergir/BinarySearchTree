@@ -36,39 +36,29 @@ private:
 	TreeNode <T, compare>* parent;
 public:
 	T data;
-	//Метод добавления элемента
+
 	void insert_element(T num);
 
-	//Метод удаления элемента по ключу
 	int _delete_element(T num);
 
-	//Метод поиска элемента по ключу
 	TreeNode <T, compare>* search(T num);
 
-	//вывод дерева на консоль
 	void print();
 
-	//Печать дерева
 	void print_tree(TreeNode <T, compare> *p, int level);
 
-	//Метод поиска максимального элемента
 	TreeNode <T, compare>* search_max_element();
 
-	//Метод поиска минимального элемента
 	TreeNode <T, compare>* search_min_element();
 
-	//конструктор по умолчанию (в main используется для корневого узла)
 	TreeNode (T data)
 		: data(data), left(NULL), right(NULL), parent(NULL) {}
 
-	//конструктор с параметрами
 	TreeNode(T data, TreeNode <T, compare>* left, TreeNode <T, compare>* right, TreeNode <T, compare>* parent)
 		: data(data), left(left), right(right), parent(parent) {}
 
-	//конструктор копирования
 	TreeNode(TreeNode <T, compare>* h);
 
-	//удаление всего дерева
 	void free_tree();
 };
 
@@ -81,15 +71,13 @@ template <class T, class compare = lessCompare <T>>
 class BinarySearchTree
 {
 private:
-	(TreeNode <T, compare>)* root; //указатель на корень 
+	(TreeNode <T, compare>)* root;
 public:
-	//конструктор по умолчанию
 	BinarySearchTree()
 	{
 		root = NULL;
 	}
 
-	//добавление
 	void add_element(T num)
 	{
 		if (root == NULL)
@@ -98,7 +86,6 @@ public:
 			root->insert_element(num);
 	}
 
-	//удаление
 	void delete_element(T num)
 	{
 		int result = root->_delete_element(num);
@@ -108,8 +95,7 @@ public:
 			throw NotFoundException();
 	}
 
-	//проверка элемента на существование
-	bool search_element(T num)
+	bool is_element_exist(T num)
 	{
 		if (root->search(num) == NULL)
 			return false;
@@ -117,7 +103,6 @@ public:
 			return true;
 	}
 
-	//максимальный элемент
 	T max()
 	{
 		TreeNode<T, compare>* a = root->search_max_element();
@@ -128,7 +113,6 @@ public:
 			throw EmptyExeption();
 	}
 
-	//минимальный элемент
 	T min()
 	{
 		TreeNode <T, compare>* a = root->search_min_element();
@@ -139,31 +123,26 @@ public:
 			throw EmptyExeption();
 	}
 
-	//печать всего дерева
 	void print()
 	{
 		root->print_tree(root, 1);
 	}
 
-	//пустое ли дерево
 	bool is_empty()
 	{
 		return (root == NULL);
 	}
 
-	//перегрузка +=
 	void operator+= (T number)
 	{
 		add_element(number);
 	}
 
-	//перегрузка -=
 	void operator-= (T number)
 	{
 		delete_element(number);
 	}
 
-	//деструктор
 	~BinarySearchTree()
 	{
 		root->free_tree();
@@ -171,7 +150,6 @@ public:
 	}
 };
 
-//добавление элемента
 template <class T, class compare = lessCompare <T>>
 void TreeNode <T, compare>::insert_element(T num)
 {
@@ -196,8 +174,6 @@ void TreeNode <T, compare>::insert_element(T num)
 	}
 }
 
-
-//удаление элемента по ключу
 template <class T, class compare = lessCompare <T>>
 int TreeNode <T, compare>::_delete_element(T num)
 {
@@ -305,8 +281,6 @@ int TreeNode <T, compare>::_delete_element(T num)
 		return -1;
 }
 
-
-//печать всего дерева
 template <class T, class compare = lessCompare <T>>
 void TreeNode <T, compare>::print_tree(TreeNode <T, compare> *p, int level)
 {
@@ -320,8 +294,6 @@ void TreeNode <T, compare>::print_tree(TreeNode <T, compare> *p, int level)
 	}
 }
 
-
-//поиск элемента по ключу
 template <class T, class compare = lessCompare <T>>
 TreeNode <T, compare>* TreeNode <T, compare>::search(T num)
 {
@@ -338,8 +310,6 @@ TreeNode <T, compare>* TreeNode <T, compare>::search(T num)
 	return NULL;
 }
 
-
-//поиск максимального элемента
 template <class T, class compare = lessCompare <T>>
 TreeNode <T, compare>* TreeNode <T, compare>::search_max_element()
 {
@@ -349,8 +319,6 @@ TreeNode <T, compare>* TreeNode <T, compare>::search_max_element()
 	return node;
 }
 
-
-//поиск мминимального элемента
 template <class T, class compare = lessCompare <T>>
 TreeNode <T, compare>* TreeNode <T, compare>::search_min_element()
 {
@@ -361,7 +329,6 @@ TreeNode <T, compare>* TreeNode <T, compare>::search_min_element()
 	return newNode;
 }
 
-//конструктор копирования
 template <class T, class compare = lessCompare <T>>
 TreeNode <T, compare>::TreeNode(TreeNode <T, compare>* h)
 {
@@ -371,8 +338,6 @@ TreeNode <T, compare>::TreeNode(TreeNode <T, compare>* h)
 	this->parent = h->parent;
 }
 
-
-//удаление всего дерева
 template <class T, class compare = lessCompare <T>>
 void TreeNode <T, compare>::free_tree()
 {
